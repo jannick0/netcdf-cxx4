@@ -1,0 +1,82 @@
+name: Run MSYS2, MinGW64-based Tests
+
+env:
+  CPPFLAGS: "-D_BSD_SOURCE"
+
+on: [pull_request, workflow_dispatch]
+
+jobs:
+
+  build-and-test-autotools:
+
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: [
+          { msystem: MINGW32 },
+          { msystem: MINGW64 },
+          { msystem: CLANG32 },
+          { msystem: CLANG64 }
+        ]
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{ matrix.msystem }}
+          update: true
+          pacboy: autotools:p cc:p netcdf:p
+
+###
+# Configure and build
+###
+
+      - name: (Autotools) Run autoconf
+        run: autoreconf -ifv
+
+      - name: (Autotools) Configure Build
+        run: |
+          mkdir bld
+          cd bld
+          ../configure -C
+        if: ${{ success() }}
+
+      - name: (Autotools) Look at config.log if error
+        run: |
+          cat config.log
+          cat config.cache
+        working-directory: bld
+        if: ${{ failure() }}
+
+      - name: (Autotools) Print Summary
+        run: cat ncxx4-config
+        working-directory: bld
+
+      - name: (Autotools) Build Library and Utilities
+        run: make V=0 -j || make V=1 -j1
+        working-directory: bld
+        if: ${{ success() }}
+
+      - name: (Autotools) Build and Run Tests
+        run: make check -j V=0 || make check -j1 V=1
+        working-directory: bld
+        if: ${{ success() }}
+        id: tests
+
+      - name: Upload test failures
+        if: ${{ failure() && steps.tests.conclusion == 'failure' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: mingw-autotools-${{ matrix.msystem }}-test-logs
+          path: bld/{cxx4,examples}/*.{log,trs}
+
+      - name: (Autotools) Run Distcheck
+        run: make distcheck
+        working-directory: bld
+        if: ${{ success() }}
