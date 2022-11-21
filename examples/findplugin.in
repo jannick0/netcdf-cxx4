@@ -27,17 +27,17 @@ FP_NAME="$1"
 # Figure out the compiler (some values from ./configure)
 FP_ISCMAKE=@ISCMAKE@
 FP_ISMSVC=@MSVC@
+FP_EXEEXT=@EXEEXT@
 
-# And topsrcdir
+# And topbuilddir
 topbuilddir='@abs_top_builddir@'
 
-# Are we operating under OS-X? (test using uname)
-FP_OS=`uname | cut -d '_'  -f 1`
-if test "x$FP_OS" = xDarwin ; then FP_ISOSX=1; fi
-
-# Are we operating under CYGWIN? (test using uname)
-FP_OS=`uname | cut -d '_'  -f 1`
-if test "x$FP_OS" = xCYGWIN ; then FP_ISCYGWIN=1; fi
+# Determining operating system (test using uname)
+case `uname | cut -d '_'  -f 1` in
+  (CYGWIN) FP_ISCYGWIN=1;;
+  (Darwin) FP_ISOSX=1;;
+  (MSYS)   FP_ISMSYS=1;;
+esac
 
 FP_PLUGINS="$topbuilddir/plugins"
 
@@ -50,6 +50,10 @@ if test "x$FP_ISMSVC" != x ; then
   FP_PLUGIN_LIB="${FP_NAME}.dll"
 elif test "x$FP_ISCYGWIN" != x ; then
   FP_PLUGIN_LIB="cyg${FP_NAME}.dll"
+elif test "x$FP_ISMSYS" != x ; then
+  FP_PLUGIN_LIB="msys-${FP_NAME}.dll"
+elif test "x$FP_EXEEXT" = 'x.exe' ; then
+  FP_PLUGIN_LIB="lib${FP_NAME}.dll"
 elif test "x$FP_ISOSX" != x ; then
   FP_PLUGIN_LIB="lib${FP_NAME}.so" # Should this include the version number in the name?
 else # Presumably some form on *nix"
