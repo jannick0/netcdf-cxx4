@@ -201,7 +201,8 @@ AS_IF([test "x$ac_cv_path_NCCONF" != "x"],
     [
       # See if these functions are in the library.
       AC_CHECK_HEADERS([netcdf.h], [], [AC_MSG_ERROR([netcdf.h could not be found. Please set CPPFLAGS.])])
-      AC_SEARCH_LIBS([nc_create], [netcdf], [], [])
+      AC_SEARCH_LIBS([nc_create], [netcdf], [],
+         [AC_MSG_ERROR([Library netcdf could not be found. Please set LDFLAGS pointing to the location to find library netcdf.])])
       AC_CHECK_FUNCS([nc_def_opaque nccreate nc_set_log_level oc_open nc_use_parallel_enabled])
 
       # Whether we build/test some functionality depends on what we found in
