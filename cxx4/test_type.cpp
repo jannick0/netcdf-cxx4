@@ -25,8 +25,8 @@ int main()
 {
 try
   {
-    cout<<"Opening file \"firstFile.cdf\" with NcFile::replace"<<endl;
-    NcFile ncFile("firstFile.cdf",NcFile::replace);
+    cout<<"Opening file \"test_type.cdf\" with NcFile::replace"<<endl;
+    NcFile ncFile("test_type.cdf",NcFile::replace);
 
     cout<<left<<std::setw(57)<<"Testing addGroup(\"groupName\")";
     NcGroup groupA(ncFile.addGroup("groupA"));

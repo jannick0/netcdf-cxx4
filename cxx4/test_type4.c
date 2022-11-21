@@ -46,7 +46,7 @@ main() {/* create aa.nc */
     int var_3_dims[RANK_var_3];
 
     /* enter define mode */
-    stat = nc_create("firstFile.cdf", NC_CLOBBER|NC_NETCDF4, &ncid);
+    stat = nc_create("test_type4_c.cdf", NC_CLOBBER|NC_NETCDF4, &ncid);
     check_err(stat,__LINE__,__FILE__);
     root_grp = ncid;
 
@@ -74,7 +74,7 @@ main() {/* create aa.nc */
       static compoundType_3 var_3__FillValue_att[1];
       int j=0;
       for (j; j < MEMSIZE3; j++) var_3__FillValue_att[0].member3[j]=0;
-      
+
       stat = nc_put_att(root_grp, var_3_id, "_FillValue", compoundType_3_typ, 1, var_3__FillValue_att);
       check_err(stat,__LINE__,__FILE__);
     }
@@ -89,7 +89,7 @@ main() {/* create aa.nc */
       compoundType_3 var_3_data[1];
       int j=0;
       for(j; j < MEMSIZE3; j++) var_3_data[0].member3[j]=j*j+1;
-    
+
       size_t var_3_startset[1] = {0} ;
       size_t var_3_countset[1] = {1} ;
       stat = nc_put_vara(root_grp, var_3_id, var_3_startset, var_3_countset, var_3_data);

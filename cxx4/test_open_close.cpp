@@ -32,9 +32,9 @@ int main() {
     }
 
     // Test opening a file that exists.
-    cout << "Opening file \"firstFile.cdf\"... ";
+    cout << "Opening file \"test_open_close.cdf\"... ";
     try {
-      file.open("firstFile.cdf",NcFile::replace);
+      file.open("test_open_close.cdf",NcFile::replace);
       cout << "Success." << endl;
     } catch(NcException &e) {
       cout << "Caught unexpected exception." << endl;

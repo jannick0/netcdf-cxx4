@@ -19,7 +19,7 @@ int main()
 {
 try
   {
-    NcFile ncFile("firstFile.cdf",NcFile::replace);
+    NcFile ncFile("test_type2.cdf",NcFile::replace);
 
       struct struct3{
 	int mem1;

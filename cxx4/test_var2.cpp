@@ -18,7 +18,7 @@ int main()
 {
   try
     {
-      NcFile ncFile("firstFile.cdf",NcFile::replace);
+      NcFile ncFile("test_var2.cdf",NcFile::replace);
 
       NcGroup groupA(ncFile.addGroup("groupA"));
       NcGroup groupA0(ncFile.addGroup("groupA0"));

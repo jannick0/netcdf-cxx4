@@ -19,7 +19,7 @@ int main()
 {
 try
   {
-    NcFile ncFile("firstFile.cdf",NcFile::replace);
+    NcFile ncFile("test_type3.cdf",NcFile::replace);
 
     const int mem3Size(100000);
     const int vlenSize(1);//100000;
