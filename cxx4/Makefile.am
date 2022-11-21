@@ -58,7 +58,9 @@ $(TESTFILES): libnetcdf_c++4.la
 check_PROGRAMS = $(TESTFILES)
 TESTS = $(TESTFILES)
 
-CLEANFILES = firstFile.cdf test*.nc
+CLEANFILES = test_classic.nc test_ncFile_Flags_newFile.nc \
+test_att.cdf test_dim.cdf test_group.cdf test_open_close.cdf \
+test_type.cdf test_var.cdf test_var2.cdf
 
 EXTRA_DIST = test_filter.cpp
 

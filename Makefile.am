@@ -27,7 +27,7 @@ EXTRA_DIST = CMakeLists.txt README.md CTestCustom.cmake \
 	CTestConfig.cmake.in
 
 # Remove these generated files, for a distclean.
-DISTCLEANFILES = VERSION
+DISTCLEANFILES = VERSION.txt
 
 install-data-hook:
 	@echo ''
