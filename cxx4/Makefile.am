@@ -42,6 +42,17 @@ test_type_SOURCES = test_type.cpp test_utilities.h
 test_open_close_SOURCES = test_open_close.cpp test_utilities.h
 test_ncFile_Flags_SOURCES = test_ncFile_Flags.cpp test_utilities.h
 
+test_classic_LDADD = libnetcdf_c++4.la
+test_group_LDADD = libnetcdf_c++4.la
+test_dim_LDADD = libnetcdf_c++4.la
+test_att_LDADD = libnetcdf_c++4.la
+test_var_LDADD = libnetcdf_c++4.la
+test_var2_LDADD = libnetcdf_c++4.la
+test_type_LDADD = libnetcdf_c++4.la
+test_open_close_LDADD = libnetcdf_c++4.la
+test_ncFile_Flags_LDADD = libnetcdf_c++4.la
+
+$(TESTFILES): libnetcdf_c++4.la
 
 # Build and run these tests.
 check_PROGRAMS = $(TESTFILES)
