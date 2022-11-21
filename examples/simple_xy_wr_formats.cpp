@@ -88,19 +88,19 @@ int create_file(string filename, NcFile::FileFormat format) {
 int main()
 {
     int ret;
-    if(ret = create_file("simple_xy_nc4.nc", NcFile::nc4))
+    if((ret = create_file("simple_xy_nc4.nc", NcFile::nc4)))
 	return ret;
     cout << "*** SUCCESS creating nc4 file" << endl;
 
-    if(ret = create_file("simple_xy_nc4classic.nc", NcFile::nc4classic))
+    if((ret = create_file("simple_xy_nc4classic.nc", NcFile::nc4classic)))
 	return ret;
     cout << "*** SUCCESS creating nc4classic file" << endl;
 
-    if(ret = create_file("simple_xy_classic.nc", NcFile::classic))
+    if((ret = create_file("simple_xy_classic.nc", NcFile::classic)))
  	return ret;
     cout << "*** SUCCESS creating classic file" << endl;
 
-    if(ret = create_file("simple_xy_classic64.nc", NcFile::classic64))
+    if((ret = create_file("simple_xy_classic64.nc", NcFile::classic64)))
  	return ret;
     cout << "*** SUCCESS creating classic64 file" << endl;
 
